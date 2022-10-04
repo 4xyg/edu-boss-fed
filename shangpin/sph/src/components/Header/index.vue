@@ -51,7 +51,7 @@ export default {
     methods: {
         goSearch() {
             // this.$router.replace("/search");
-            this.$router.replace({
+            let result=this.$router.replace({
                 name: "search",
                 params: {
                     keyword: this.keyword||undefined,
@@ -60,6 +60,8 @@ export default {
                     k: this.keyword.toUpperCase(),
                 },
             });
+            console.log(result);
+
         },
     },
 };
