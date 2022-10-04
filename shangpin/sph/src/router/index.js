@@ -18,7 +18,6 @@ export default new VueRouter({
         {
             path: "/search/:keyword?",
             component: Search,
-            meta:{show_footer:false},
             name:'search',
             props:true
         },
@@ -33,6 +32,7 @@ export default new VueRouter({
         {
             path: "*",
             component: Home,
+            meta:{show_footer:true}
         },
     ],
 });
