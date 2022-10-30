@@ -101,7 +101,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name:'ListContainer',
+    mounted(){
+        this.$stroe.dispath('getBannerList');
+    }
+};
 </script>
 
 <style scoped lang="less">

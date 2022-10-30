@@ -51,7 +51,7 @@ export default {
     methods: {
         goSearch() {
             // this.$router.replace("/search");
-            let result=this.$router.replace({
+            let location={
                 name: "search",
                 params: {
                     keyword: this.keyword||undefined,
@@ -59,7 +59,12 @@ export default {
                 query: {
                     k: this.keyword.toUpperCase(),
                 },
-            });
+            };
+            if(this.$route.query){
+                location.query=this.$route.query;
+            }
+
+            let result=this.$router.replace(location);
             console.log(result);
 
         },
