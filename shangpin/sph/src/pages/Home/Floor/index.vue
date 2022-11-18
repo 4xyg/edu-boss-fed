@@ -3,13 +3,13 @@
     <div class="floor">
         <div class="py-container">
             <div class="title clearfix">
-                <h3 class="fl">家用电器</h3>
+                <h3 class="fl">{{list.name}}</h3>
                 <div class="fr">
                     <ul class="nav-tabs clearfix">
-                        <li class="active">
-                            <a href="#tab1" data-toggle="tab">热门</a>
+                        <li class="active" v-for="(nav,index) in list.navList" :key="index">
+                            <a :href="nav.url" data-toggle="tab">{{nav.text}}</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#tab2" data-toggle="tab">大家电</a>
                         </li>
                         <li>
@@ -26,7 +26,7 @@
                         </li>
                         <li>
                             <a href="#tab7" data-toggle="tab">高端电器</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -45,25 +45,7 @@
                             <img src="./images/floor-1-1.png" />
                         </div>
                         <div class="floorBanner">
-                            <div class="swiper-container" id="floor2Swiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="./images/floor-1-b01.png" />
-                                    </div>
-                                    <!-- <div class="swiper-slide">
-                                        <img src="./images/floor-1-b02.png" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="./images/floor-1-b03.png" />
-                                    </div> -->
-                                </div>
-                                <!-- 如果需要分页器 -->
-                                <div class="swiper-pagination"></div>
-
-                                <!-- 如果需要导航按钮 -->
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-button-next"></div>
-                            </div>
+                         <Carousel :list="list.carouselList"/>
                         </div>
                         <div class="split">
                             <span class="floor-x-line"></span>
@@ -94,7 +76,21 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+    name: "FloorContainer",
+    props:['list'],
+    mounted() {
+        // 派发action 将数据存储在仓库
+        this.$store.dispatch("getFloorList");
+    },
+    // computed: {
+    //     ...mapState({
+    //         floorList: (state) => state.home.floorList,
+    //     }),
+    // },
+
+};
 </script>
 
 <style scoped lang="less">

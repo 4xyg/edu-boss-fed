@@ -4,20 +4,11 @@
         <div class="sortList clearfix">
             <div class="center">
                 <!--banner轮播-->
-                <div class="swiper-container" id="mySwiper">
+                <div class="swiper-container" ref="banner_swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="./images/banner1.jpg" />
+                        <div class="swiper-slide" v-for="(carousel, index) in bannerList" :key="carousel.id">
+                            <img :src="carousel.imgUrl" />
                         </div>
-                        <!-- <div class="swiper-slide">
-                            <img src="./images/banner2.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/banner3.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/banner4.jpg" />
-                        </div> -->
                     </div>
                     <!-- 如果需要分页器 -->
                     <div class="swiper-pagination"></div>
@@ -101,11 +92,38 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import Swiper from "swiper";
 export default {
-    name:'ListContainer',
-    mounted(){
-        this.$stroe.dispath('getBannerList');
-    }
+    name: "ListContainer",
+    mounted() {
+        // 派发action 将数据存储在仓库
+        this.$store.dispatch("getBannerList");
+    },
+    computed: {
+        ...mapState({
+            bannerList: (state) => state.home.bannerList,
+        }),
+    },
+    watch: {
+        bannerList: {
+            handler(newVal, oldVal) {
+                this.$nextTick(() => {
+                    var banner_swiper = new Swiper(this.$refs.banner_swiper, {
+                        loop: true,
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                    });
+                });
+            },
+        },
+    },
 };
 </script>
 
