@@ -13,6 +13,7 @@ import '@/mock/mockServe';
 import 'swiper/css/swiper.css';
 
 
+
 Vue.config.productionTip = false
 Vue.component(TypeNav.name,TypeNav);
 Vue.component(Carousel.name,Carousel);
