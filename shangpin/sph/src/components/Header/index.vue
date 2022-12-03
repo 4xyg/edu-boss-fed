@@ -69,6 +69,12 @@ export default {
 
         },
     },
+    mounted(){
+        //通过全局事件总线，清楚关键字
+        this.$bus.$on("clear",() =>{
+            this.keyword="";
+        })
+    }
 };
 </script>
 

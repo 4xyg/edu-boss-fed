@@ -68,13 +68,13 @@ export default {
                 let hrefset = {
                     name: "search", //来控制跳转的路由
                 };
-                let setquery = { categoryname: categoryname };
+                let setquery = { categoryName: categoryname };
                 if (category1) {
-                    setquery.category1 = category1;
+                    setquery.category1Id = category1;
                 } else if (category2) {
-                    setquery.category2 = category2;
+                    setquery.category2Id = category2;
                 } else if (category3) {
-                    setquery.category3 = category3;
+                    setquery.category3Id = category3;
                 }
                 hrefset.query = setquery;
 
