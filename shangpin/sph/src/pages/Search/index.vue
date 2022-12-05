@@ -31,24 +31,13 @@
                     <div class="sui-navbar">
                         <div class="navbar-inner filter">
                             <ul class="sui-nav">
-                                <li class="active">
-                                    <a href="#">综合</a>
+                                <li :class="{active:isSortOne}">
+                                    <span>综合</span>
                                 </li>
-                                <li>
-                                    <a href="#">销量</a>
+                                <li :class="{active:isSortTwo}">
+                                    <span>销量</span>
                                 </li>
-                                <li>
-                                    <a href="#">新品</a>
-                                </li>
-                                <li>
-                                    <a href="#">评价</a>
-                                </li>
-                                <li>
-                                    <a href="#">价格⬆</a>
-                                </li>
-                                <li>
-                                    <a href="#">价格⬇</a>
-                                </li>
+                               
                             </ul>
                         </div>
                     </div>
@@ -361,7 +350,7 @@ export default {
 
                 keyword: "",
 
-                order: "",
+                order: "1:one",
 
                 pageNo: 1,
 
@@ -385,6 +374,12 @@ export default {
     },
     computed: {
         ...mapGetters(["goodsList", "attrsList", "trademarkList"]),
+        isSortOne(){
+            return this.searchParams.order.split(':')[0] == 1;
+        },
+        isSortTwo(){
+            return this.searchParams.order.split(':')[0] == 2;
+        },
     },
     watch: {
         $route(newValue, oldValue) {
@@ -550,7 +545,7 @@ export default {
                             float: left;
                             line-height: 18px;
 
-                            a {
+                            span,a {
                                 display: block;
                                 cursor: pointer;
                                 padding: 11px 15px;
@@ -559,7 +554,7 @@ export default {
                             }
 
                             &.active {
-                                a {
+                                a,span {
                                     background: #e1251b;
                                     color: #fff;
                                 }
