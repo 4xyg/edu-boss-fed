@@ -29,7 +29,7 @@
             <div class="fl key">{{item.attrName}}</div>
             <div class="fl value">
                 <ul class="type-list">
-                    <li v-for="(val,inx) in item.attrValueList" :key="inx">
+                    <li v-for="(val,inx) in item.attrValueList" :key="inx" @click="attrSearch(item,val)">
                         <a>{{val}}</a>
                     </li>
                    
@@ -53,6 +53,12 @@ export default {
     methods:{
         trademarkSearch(trademark){
             this.$emit('trademarkInfo',trademark);//发送trademarkInfo自定义事件到父组件，携带参数trackmark
+        }
+
+        ,
+        attrSearch(attr,attrval){
+            /* 这里的参数，是需要请求的参数，searchParams */
+            this.$emit('attrInfo',attr,attrval);//发送trademarkInfo自定义事件到父组件，携带参数trackmark
         }
     }
 };

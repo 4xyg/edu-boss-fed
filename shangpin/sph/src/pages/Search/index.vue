@@ -14,11 +14,17 @@
                     <ul class="fl sui-tag">
                         <li class="with-x" v-if="searchParams.categoryName">{{ searchParams.categoryName }}<i @click="removeCategoryName">×</i></li>
                         <li class="with-x" v-if="searchParams.keyword">{{ searchParams.keyword }}<i @click="removeKeyword">×</i></li>
+                        <!-- 品牌展示 -->
+                        <li class="with-x" v-if="searchParams.trademark">{{ searchParams.trademark.split(':')[1] }}<i @click="removeTrademark">×</i></li>
+
+                        <!-- 属性搜索 -->
+                        <li class="with-x" v-for="(attrValue,inx) in searchParams.props" :key="inx">{{ attrValue.split(':')[1] }}<i @click="removeAttrvalue(inx)">×</i></li>
+
                     </ul>
                 </div>
 
                 <!--selector-->
-                <SearchSelector @trademarkInfo="trademarkSearch" />
+                <SearchSelector @trademarkInfo="trademarkSearch" @attrInfo="attrSearch" />
 
                 <!--details-->
                 <div class="details clearfix">
@@ -417,10 +423,27 @@ export default {
             this.$router.replace({ name: "search", query: this.$route.query });
             // }
         },
+        removeTrademark(){
+            this.searchParams.trademark = undefined;
+            this.getData(this.searchParams);
+
+        },
         trademarkSearch(trademark) {
             this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`;
             this.getData(this.searchParams);
 
+        },
+        attrSearch(attr,attrval){
+            let attrprop=`${attr.attrId}:${attrval}:${attr.attrName}`;
+            if(this.searchParams.props.indexOf(attrprop) == -1){
+                this.searchParams.props.push(attrprop);
+            this.getData(this.searchParams);
+            } 
+
+        },
+        removeAttrvalue(inx){
+            this.searchParams.props.splice(inx,1);
+            this.getData(this.searchParams);
         },
     },
 };
