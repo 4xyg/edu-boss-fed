@@ -7,6 +7,7 @@ import  Home  from "@/pages/Home";
 import  Search  from "@/pages/Search";
 import  Login  from "@/pages/Login";
 import  Register  from "@/pages/Register";
+import  Detail  from "@/pages/Detail";
 
 export default new VueRouter({
     routes: [
@@ -19,6 +20,12 @@ export default new VueRouter({
             path: "/search/:keyword?",
             component: Search,
             name:'search',
+            props:true
+        },
+        {
+            path: "/detail/:keyword?",
+            component: Detail,
+            name:'detail',
             props:true
         },
         {
@@ -35,4 +42,7 @@ export default new VueRouter({
             meta:{show_footer:true}
         },
     ],
+    scrollBehavior(to,from,savedPosition){
+        return {y:0}
+    }
 });
