@@ -3,6 +3,7 @@
 import axios from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
+import store from "@/store";
 
 const requests=axios.create({
     baseURL:"/api",
@@ -12,6 +13,14 @@ const requests=axios.create({
 
 
 requests.interceptors.request.use(config=>{
+    if(
+
+        store.state.detail.uuid_token
+
+    )
+    {
+        config.headers.userTempId=store.state.detail.uuid_token;//需要跟后端商量好header头
+    }
     nprogress.start();
     return config
 })
