@@ -83,6 +83,7 @@ export default {
     mounted() {
         // 派发action 将数据存储在仓库
         this.$store.dispatch("getFloorList");
+        
     },
     // computed: {
     //     ...mapState({

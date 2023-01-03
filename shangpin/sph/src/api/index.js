@@ -96,3 +96,57 @@ export const reqCheckCart = (skuID,isChecked) => {
         // data:skuid,
     });
 }
+
+//请求验证码
+export const reqGetCode = (phone) => {
+    return requests({
+        url: `user/passport/sendCode/${phone}`,
+        method: "get",
+        // data:skuid,
+    });
+}
+
+//用户注册
+export const reqGetUser = (data) => {
+    return requests({
+        url: `user/passport/register/`,
+        method: "post",
+        data:data,
+    });
+}
+
+
+
+
+//用户登录
+export const reqGetLogin = (data) => {
+    return requests({
+        url: `user/passport/login/`,
+        method: "post",
+        data:data,
+    });
+}
+
+
+
+//获取登录信息
+export const reqGetUserInfo = (data) => {
+    return requests({
+        url: `user/passport/auth/getUserInfo`,
+        method: "get",
+        data:data,
+    });
+}
+
+
+
+//退出登录
+export const reqLogout = (data) => {
+    return requests({
+        url: `user/passport/logout`,
+        method: "get",
+        data:data,
+    });
+}
+
+
