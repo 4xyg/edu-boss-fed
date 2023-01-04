@@ -1,6 +1,6 @@
 import { reqGetCode, reqGetUser, reqGetLogin, reqGetUserInfo, reqLogout } from '@/api'
 const state = {
-    token: sessionStorage.getItem('TOKEN'),
+    token: localStorage.getItem('TOKEN'),
     user_info: {}
 
 };
@@ -18,7 +18,7 @@ const mutations = {
         state.token = '';
         state.user_info = {};
 
-        sessionStorage.removeItem('TOKEN');
+        localStorage.removeItem('TOKEN');
     }
 
 };
@@ -53,7 +53,7 @@ const actions = {
         if (result.code == 200) {
             // 存储token
             commit("USERLOGIN", result.data.token);
-            sessionStorage.setItem("TOKEN", result.data.token);
+            localStorage.setItem("TOKEN", result.data.token);
             return 'ok'
         } else {
             alert(result.message)
@@ -69,7 +69,7 @@ const actions = {
             return 'ok'
 
         } else {
-            alert(result.message)
+            console.log(result.message);
             return Promise.reject(new Error('failed'))
         }
 

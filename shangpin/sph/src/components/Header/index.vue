@@ -97,8 +97,8 @@ export default {
       this.keyword = "";
     });
 
-    this.$store.dispatch("getUserInfo");
-    console.log(this.$store);
+    // this.$store.dispatch("getUserInfo");
+    // console.log(this.$store);
   },
   computed: {
     userName() {
