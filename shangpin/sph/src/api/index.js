@@ -84,12 +84,12 @@ export const reqCartList = (skuid, skuNum) => {
 
 export const reqDeleteCartById = (skuid) => {
     return requests({
-        url: "/cart/deleteCart/" + skuid ,
+        url: "/cart/deleteCart/" + skuid,
         method: "delete",
         // data:skuid,
     });
 }
-export const reqCheckCart = (skuID,isChecked) => {
+export const reqCheckCart = (skuID, isChecked) => {
     return requests({
         url: `/cart/checkCart/${skuID}/${isChecked}`,
         method: "get",
@@ -111,7 +111,7 @@ export const reqGetUser = (data) => {
     return requests({
         url: `user/passport/register/`,
         method: "post",
-        data:data,
+        data: data,
     });
 }
 
@@ -123,7 +123,7 @@ export const reqGetLogin = (data) => {
     return requests({
         url: `user/passport/login/`,
         method: "post",
-        data:data,
+        data: data,
     });
 }
 
@@ -134,7 +134,7 @@ export const reqGetUserInfo = (data) => {
     return requests({
         url: `user/passport/auth/getUserInfo`,
         method: "get",
-        data:data,
+        data: data,
     });
 }
 
@@ -145,8 +145,31 @@ export const reqLogout = (data) => {
     return requests({
         url: `user/passport/logout`,
         method: "get",
-        data:data,
+        data: data,
     });
 }
+
+
+//后去用户地址信息
+export const reqAddressInfo = () => {
+    return requests({
+        url: `user/userAddress/auth/findUserAddressList`,
+        method: "get",
+        // data:data,
+    });
+}
+
+//后去用户地址信息
+export const reqOrderInfo = () => {
+    return requests({
+        url: `order/auth/trade`,
+        method: "get",
+        // data:data,
+    });
+}
+
+
+
+
 
 

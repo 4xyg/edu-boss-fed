@@ -10,6 +10,8 @@ import Register from "@/pages/Register";
 import Detail from "@/pages/Detail";
 import AddCartSuccess from "@/pages/AddCartSuccess";
 import ShopCart from "@/pages/ShopCart";
+import Trade from "@/pages/Trade";
+
 
 let router = new VueRouter({
     routes: [
@@ -48,6 +50,12 @@ let router = new VueRouter({
             path: "/shopcart",
             name: 'shopcart',
             component: ShopCart,
+            meta: { show_footer: true }
+        },
+        {
+            path: "/trade",
+            name: 'trade',
+            component: Trade,
             meta: { show_footer: true }
         },
         {
