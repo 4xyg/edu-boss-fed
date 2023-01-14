@@ -59,13 +59,13 @@
           <li>X{{ item.skuNum }}</li>
           <li>{{ item.hasStock ? "有货" : "无货" }}</li>
         </ul>
-
       </div>
       <div class="bbs">
         <h5>买家留言：</h5>
         <textarea
           placeholder="建议留言前先与商家沟通确认"
-          class="remarks-cont" v-model="message"
+          class="remarks-cont"
+          v-model="message"
         ></textarea>
       </div>
       <div class="line"></div>
@@ -78,8 +78,11 @@
     <div class="money clearFix">
       <ul>
         <li>
-          <b><i>{{orderInfo.totalNum}}</i>件商品，总商品金额</b>
-          <span>{{orderInfo.totalAmount}}</span>
+          <b
+            ><i>{{ orderInfo.totalNum }}</i
+            >件商品，总商品金额</b
+          >
+          <span>{{ orderInfo.totalAmount }}</span>
         </li>
         <li>
           <b>返现：</b>
@@ -101,19 +104,22 @@
       </div>
     </div>
     <div class="sub clearFix">
-      <router-link class="subBtn" to="/pay">提交订单</router-link>
+      <a class="subBtn" href="javascript:;" @click="submitOrder">提交订单</a>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+/* 如果不用vuex */
+
 export default {
   name: "Trade",
-  data(){
-    return  {
-      message:''
-    }
+  data() {
+    return {
+      message: "",
+      orderid: "",
+    };
   },
   mounted() {
     this.$store.dispatch("getUserAddress");
@@ -124,6 +130,26 @@ export default {
       //修改默认地址
       addressInfo.forEach((item) => (item.isDefault = "0"));
       address.isDefault = "1";
+    },
+    async submitOrder() {
+      console.log(this.$API);
+      let { tradeNo } = this.orderInfo;
+      let data = {
+        consignee: this.useDefaultAddress.consignee,
+        consigneeTel: this.useDefaultAddress.phoneNum,
+        deliveryAddrss: this.useDefaultAddress.fullAddress,
+        orderComment: this.message,
+        orderDetailList: this.orderInfo.detailArrayList,
+      };
+
+      let result = await this.$API.reqSubmitOrder(tradeNo, data);
+
+      if (result.code == 200) {
+        this.orderid = result.data;
+        this.$router.push("/pay?orderid=" + this.orderid);
+      } else {
+        alert(result.data);
+      }
     },
   },
   computed: {

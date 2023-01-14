@@ -11,6 +11,7 @@ import Detail from "@/pages/Detail";
 import AddCartSuccess from "@/pages/AddCartSuccess";
 import ShopCart from "@/pages/ShopCart";
 import Trade from "@/pages/Trade";
+import Pay from "@/pages/Pay";
 
 
 let router = new VueRouter({
@@ -56,6 +57,12 @@ let router = new VueRouter({
             path: "/trade",
             name: 'trade',
             component: Trade,
+            meta: { show_footer: true }
+        },
+        {
+            path: "/pay",
+            name: 'pay',
+            component: Pay,
             meta: { show_footer: true }
         },
         {

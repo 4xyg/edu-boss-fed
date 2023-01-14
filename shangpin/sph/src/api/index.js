@@ -168,7 +168,33 @@ export const reqOrderInfo = () => {
     });
 }
 
+//提交订单
+export const reqSubmitOrder = (tradeNo,data) => {
+    return requests({
+        url: `order/auth/submitOrder?tradeNo=${tradeNo}`,
+        data,
+        method: "post",
+    });
+}
 
+
+
+//获取订单信息
+
+export const reqPayInfo = (orderId) => {
+    return requests({
+        url: `payment/weixin/createNative/${orderId}`,
+        method: "post",
+    });
+}
+
+//获取支付订单状态
+export const reqPayStatus = (orderId) => {
+    return requests({
+        url: `payment/weixin/queryPayStatus/${orderId}`,
+        method: "get",
+    });
+}
 
 
 

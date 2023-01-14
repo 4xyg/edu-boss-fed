@@ -73,7 +73,7 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" :checked="isAllChecked" type="checkbox" />
+        <input class="chooseAll" @change="chooseAll" ref="allbtn" :checked="isAllChecked" type="checkbox" />
         <span>全选</span>
       </div>
       <div class="option">
@@ -117,6 +117,16 @@ export default {
     getData() {
       this.$store.dispatch("getCartList"); //派发action，请求数据
     },
+    chooseAll(e){
+      let infolist=this.cartInfoList||[]
+      for (let index = 0; index < infolist.length; index++) {
+        let element = infolist[index];
+        console.log(e.target.checked);
+        element.isChecked = e.target.checked;
+        this.changeCartStatus(element,e);
+      }
+    }
+    ,
     cartNumHandle: throttle(async function (type, diffNum, cart) {
       switch (type) {
         case "add":
@@ -166,7 +176,6 @@ export default {
     
     async changeCartStatus(cart, $event) {
       try {
-        console.log($event.target.checked + 0);
         let result = await this.$store.dispatch("checkCart", {
           skuId: cart.skuId,
           isChecked: $event.target.checked + 0,
