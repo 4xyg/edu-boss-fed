@@ -12,14 +12,21 @@ import AddCartSuccess from "@/pages/AddCartSuccess";
 import ShopCart from "@/pages/ShopCart";
 import Trade from "@/pages/Trade";
 import Pay from "@/pages/Pay";
+import Center from "@/pages/Center";
 
+
+/* 二级路由  */
+import MyOrder from '@/pages/Center/myOrder';
+import GroupOrder from '@/pages/Center/groupOrder';
+/* end 二级路由  */
 
 let router = new VueRouter({
     routes: [
         {
             path: "/home",
             component: Home,
-            meta: { show_footer: true }
+            meta: { show_footer: true },
+ 
         },
         {
             path: "/search/:keyword?",
@@ -66,6 +73,22 @@ let router = new VueRouter({
             meta: { show_footer: true }
         },
         {
+            path: "/center",
+            name: 'center',
+            component: Center,
+            meta: { show_footer: true },
+            children:[
+                {
+                    path:'myorder',//不用带反斜杠
+                    component:MyOrder
+                },
+                {
+                    path:'grouporder',//不用带反斜杠
+                    component:GroupOrder
+                }
+            ]
+        },
+        {
             path: "*",
             component: Home,
             meta: { show_footer: true }
@@ -82,7 +105,7 @@ router.beforeEach(async (to, from, next) => {
     let user_info = store.state.user.user_info;
     let name = store.state.user.user_info.name;
     if (token) {
-        if (to.path == '/login' ||to.path == '/register') {
+        if (to.path == '/login' || to.path == '/register') {
             next('/home');
         } else {
             if (name) {
@@ -98,8 +121,11 @@ router.beforeEach(async (to, from, next) => {
             }
         }
 
-    }else{
-        console.log(444);
+    } else {
+        let topath = to.path;
+        if (topath.indexOf('/trade') != -1 || topath.indexOf('/pay') != -1 || topath.indexOf('/center') != -1) {
+            next('/login?redirect='+topath);
+        }
 
         next();
     }

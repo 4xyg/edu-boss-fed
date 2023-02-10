@@ -95,7 +95,8 @@ export default {
           });
           console.log(GetLogin);
           // GetLogin.success(func)
-          this.$router.push('/home');
+          let redirect_path=this.$route.query.redirect||'/home';
+          this.$router.push(redirect_path);
 
         } else {
           alert("填写不正确");

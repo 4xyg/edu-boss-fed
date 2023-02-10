@@ -167,12 +167,13 @@ export default {
             clearInterval(this.timer);
             done();
           } else {
-            if (this.code == 200) {
+            // if (this.code == 200) {
               clearInterval(this.timer);
               this.timer = null;
               done();
+              this.$router.push("/paysuccess")
               
-            }
+            // }
           }
         },
       });
