@@ -199,3 +199,16 @@ export const reqPayStatus = (orderId) => {
 
 
 
+
+//获取个人中心 我的订单的数据
+
+export const reqMyOrderList = (page,limit) => {
+    return requests({
+        url: `/order/auth/${page}/${limit}`,
+        method: "get",
+    });
+}
+
+
+
+
