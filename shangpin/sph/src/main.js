@@ -26,6 +26,14 @@ Vue.component(Carousel.name, Carousel);
 Vue.prototype.$msgbox=MessageBox;
 Vue.prototype.$alert=MessageBox.alert;
 
+
+import myPlugins from "./plugins/myPlugins";
+Vue.use(myPlugins,{
+    name:'upper'
+});
+
+import '@/plugins/vee';
+
 new Vue({
     render: (h) => h(App),
     //全局事件总线

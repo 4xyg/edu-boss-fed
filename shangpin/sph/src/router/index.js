@@ -64,13 +64,28 @@ let router = new VueRouter({
             path: "/trade",
             name: 'trade',
             component: Trade,
-            meta: { show_footer: true }
+            meta: { show_footer: true },
+            beforeEnter:(to,from,next)=>{
+                /* 去交易页面必须从购物车进来才对 */
+                if(from.path == "/shopcart"){
+                    next();
+                }else{
+                    next(false)
+                }
+            }
         },
         {
             path: "/pay",
             name: 'pay',
             component: Pay,
-            meta: { show_footer: true }
+            meta: { show_footer: true },
+            beforeEnter:(to,from,next)=>{
+                if(from.path == "/trade"){
+                    next();
+                }else{
+                    next(false)
+                }
+            }
         },
         {
             path: "/center",
