@@ -3,8 +3,8 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 import store from "@/store";
-import Home from "@/pages/Home";
-import Search from "@/pages/Search";
+const Home = ()=> import("@/pages/Home");
+const Search = ()=> import("@/pages/Search");
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Detail from "@/pages/Detail";
